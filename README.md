@@ -23,7 +23,7 @@ python -m pip install pandas matplotlib
 2. Open the folder in VS Code.
 3. Run the program:
 
-python studentID_python_monitoring.py
+python 1002682006_python_monitoring.py
 
 Replace studentID with your actual student ID.
 
