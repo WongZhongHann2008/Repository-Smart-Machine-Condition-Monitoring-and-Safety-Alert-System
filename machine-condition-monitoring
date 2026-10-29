@@ -1,1 +1,57 @@
 
+# Function to classify machine condition
+
+def classify_condition(temperature, pressure, vibration, current, rpm):
+
+    # Check Critical conditions first
+    if (temperature > 50 or pressure > 6.0
+            or vibration > 6.0 or current > 5.0
+            or rpm < 1350 or rpm > 1550):
+        return "CRITICAL"
+
+    # Check Warning conditions
+    elif (temperature >= 40 or pressure < 2.0
+            or vibration >= 3.0 or current >= 4.0
+            or rpm < 1400 or rpm > 1500):
+        return "WARNING"
+
+    # Otherwise, Normal
+    else:
+        return "NORMAL"
+
+
+# Task H: Test the ten cases
+
+test_cases = [
+    (1, 35, 4.0, 2.0, 3.5, 1450, "NORMAL"),
+    (2, 40, 4.0, 2.0, 3.5, 1450, "WARNING"),
+    (3, 50, 4.0, 2.0, 3.5, 1450, "WARNING"),
+    (4, 50.1, 4.0, 2.0, 3.5, 1450, "CRITICAL"),
+    (5, 35, 6.1, 2.0, 3.5, 1450, "CRITICAL"),
+    (6, 35, 4.0, 6.1, 3.5, 1450, "CRITICAL"),
+    (7, 35, 4.0, 2.0, 5.1, 1450, "CRITICAL"),
+    (8, 35, 4.0, 2.0, 3.5, 1349, "CRITICAL"),
+    (9, 35, 4.0, 2.0, 3.5, 1390, "WARNING"),
+    (10, 35, 1.9, 2.0, 3.5, 1450, "WARNING")
+]
+
+passed = 0
+
+for test in test_cases:
+    test_id, temp, pressure, vibration, current, rpm, expected = test
+
+    actual = classify_condition(
+        temp, pressure, vibration, current, rpm
+    )
+
+    if actual == expected:
+        print(f"Test {test_id}: PASS - {actual}")
+        passed += 1
+    else:
+        print(
+            f"Test {test_id}: FAIL - "
+            f"Expected {expected}, Got {actual}"
+        )
+
+print(f"\nTests passed: {passed}/10")
+
